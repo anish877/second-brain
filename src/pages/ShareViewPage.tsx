@@ -49,7 +49,7 @@ const SharedView = () => {
         const fetchSharedContent = async () => {
             try {
                 const shareId = window.location.pathname.split('/').pop();
-                const response = await fetch(`http://localhost:3000/api/v1/brain/${shareId}`);
+                const response = await fetch(`https://second-brain-backend-rymw.onrender.com/api/v1/brain/${shareId}`);
                 const data = await response.json();
                 setData(data);
             } catch (error) {

@@ -18,7 +18,7 @@ function createYouTubeEmbedLink(link: string) {
 }
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000', 
+    baseURL: 'https://second-brain-backend-rymw.onrender.com', 
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',

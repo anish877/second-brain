@@ -71,7 +71,7 @@ const SignupPage: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await axios.post<SignupResponse>(
-        'http://localhost:3000/api/v1/signup',
+        'https://second-brain-backend-rymw.onrender.com/api/v1/signup',
         {
           username: formData.username,
           email: formData.email,

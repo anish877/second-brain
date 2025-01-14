@@ -66,7 +66,7 @@ const AIContentCreator: React.FC<AIContentCreatorProps> = ({
         tags: card.tags
       }));
 
-      const response = await axios.post<PreviewData>('http://localhost:3000/api/v1/ai/generate-content', {
+      const response = await axios.post<PreviewData>('https://second-brain-backend-rymw.onrender.com/api/v1/ai/generate-content', {
         topic,
         contentType: selectedType,
         contentHistory
