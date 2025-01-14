@@ -37,7 +37,7 @@ const ShareContentModel = ({ isOpen, onClose,link }: ShareContentModelProps) => 
               className="px-4 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors flex gap-2 items-center"
               onClick={()=>{
                 navigator.clipboard.writeText
-                (`http://localhost:5173/${link}`);
+                (`https://second-brain-rosy.vercel.app/${link}`);
               }}
             >
                 <Copy className="h-5"/>
