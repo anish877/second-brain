@@ -9,8 +9,7 @@ import axios from 'axios'
 import AIContentCreator from '../components/ui/AIContentCreatorModel';
 import { useNavigate } from 'react-router'
 
-// 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
-// Custom hook for responsive columns
+
 const useResponsiveColumns = () => {
   const [columns, setColumns] = useState(3);
   useEffect(() => {
