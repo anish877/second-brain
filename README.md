@@ -49,3 +49,4 @@ export default tseslint.config({
 })
 ```
 # second-brain
+# second-brain
