@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-const SignupPage = () => {
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface FormErrors {
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  submit?: string;
+}
+
+interface SignupResponse {
+  user: string;
+  // Add other response fields if needed
+}
+
+const SignupPage: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     username: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(()=>{
-    const user = sessionStorage.getItem('user')
-    if(user){
-      navigate('/')
+  useEffect(() => {
+    const user = sessionStorage.getItem('user');
+    if (user) {
+      navigate('/');
     }
-  },[])
-  const validateForm = () => {
-    const newErrors = {};
+  }, [navigate]);
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required';
     }
@@ -43,32 +64,47 @@ const SignupPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/signup', {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password
-      }, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await axios.post<SignupResponse>(
+        'http://localhost:3000/api/v1/signup',
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      });
+      );
       
       if (response.data) {
-        sessionStorage.setItem('user',response.data.user)
+        sessionStorage.setItem('user', response.data.user);
         navigate('/');
       }
     } catch (error) {
-      setErrors({ submit: error.response?.data?.message || 'Signup failed. Please try again.' });
+      const axiosError = error as AxiosError<{ message: string }>;
+      setErrors({ 
+        submit: axiosError.response?.data?.message || 'Signup failed. Please try again.' 
+      });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -97,7 +133,7 @@ const SignupPage = () => {
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                   value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  onChange={handleInputChange}
                 />
                 {errors.username && (
                   <p className="mt-1 text-sm text-red-600">{errors.username}</p>
@@ -117,7 +153,7 @@ const SignupPage = () => {
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={handleInputChange}
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -137,7 +173,7 @@ const SignupPage = () => {
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={handleInputChange}
                 />
                 <button
                   type="button"
@@ -168,7 +204,7 @@ const SignupPage = () => {
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                   value={formData.confirmPassword}
-                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                  onChange={handleInputChange}
                 />
                 {errors.confirmPassword && (
                   <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>

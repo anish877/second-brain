@@ -171,11 +171,12 @@ const Card = (props: CardInterface) => {
 
             <div className="p-4 border-t border-gray-100">
                 <div className="flex gap-2 flex-wrap">
-                    {props.tags.map((item) => (
+                    {props.tags.map((item: any) => (
+                        
                         <div 
                             key={item.name || item} 
                             className="py-1 px-2.5 rounded-full text-indigo-600 bg-indigo-50 text-xs font-medium transition-colors hover:bg-indigo-100"
-                        >
+                        >   
                             #{item.name || item}
                         </div>
                     ))}

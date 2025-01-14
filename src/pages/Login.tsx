@@ -44,6 +44,7 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
+        //@ts-ignore
       setError(error.response?.data?.message || 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -122,7 +123,7 @@ const Login = () => {
                 text={isLoading ? "Logging in..." : "Log in"}
                 variant="primary"
                 size="md"
-                disabled={isLoading}
+                // disabled={isLoading}
                 onClick={handleLogin}
                 className="w-full"
               />

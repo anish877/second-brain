@@ -2,28 +2,46 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Brain } from 'lucide-react'
 
+interface Tag {
+    name: string;
+}
+
+interface Content {
+    _id: string;
+    title: string;
+    type: 'youtube' | 'twitter';
+    link: string;
+    description?: string;
+    tags: Tag[];
+}
+
+interface SharedData {
+    username: string;
+    content: Content[];
+}
+
 const useResponsiveColumns = () => {
-  const [columns, setColumns] = useState(3);
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      if (width < 640) setColumns(1);
-      else if (width < 1024) setColumns(2);
-      else if (width < 1536) setColumns(3);
-      else setColumns(4);
-    };
+    const [columns, setColumns] = useState(3);
+    useEffect(() => {
+        const updateColumns = () => {
+            const width = window.innerWidth;
+            if (width < 640) setColumns(1);
+            else if (width < 1024) setColumns(2);
+            else if (width < 1536) setColumns(3);
+            else setColumns(4);
+        };
 
-    updateColumns();
-    window.addEventListener('resize', updateColumns);
-    return () => window.removeEventListener('resize', updateColumns);
-  }, []);
+        updateColumns();
+        window.addEventListener('resize', updateColumns);
+        return () => window.removeEventListener('resize', updateColumns);
+    }, []);
 
-  return columns;
+    return columns;
 };
 
 const SharedView = () => {
     const navigate = useNavigate();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<SharedData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const columns = useResponsiveColumns();
 
@@ -44,9 +62,8 @@ const SharedView = () => {
         fetchSharedContent();
     }, []);
 
-    // Function to distribute cards into columns
-    const distributeCards = (cards) => {
-        const columnArrays = Array.from({ length: columns }, () => []);
+    const distributeCards = (cards: Content[]) => {
+        const columnArrays = Array.from({ length: columns }, () => [] as Content[]);
         cards.forEach((card, index) => {
             const columnIndex = index % columns;
             columnArrays[columnIndex].push(card);
@@ -54,11 +71,11 @@ const SharedView = () => {
         return columnArrays;
     };
 
-    const createYouTubeEmbedLink = (link) => {
+    const createYouTubeEmbedLink = (link: string) => {
         return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
     };
 
-    const formatDescription = (text) => {
+    const formatDescription = (text: string) => {
         if (!text) return { __html: '' };
         
         const formattedText = text
@@ -83,7 +100,7 @@ const SharedView = () => {
         return { __html: formattedText };
     };
 
-    const Card = ({ content }) => (
+    const Card = ({ content }: { content: Content }) => (
         <div className="bg-white border border-gray-200 rounded-xl shadow-xl transition-all duration-300 hover:shadow-lg max-w-full">
             <div className="flex justify-between p-4 items-center border-b border-gray-100">
                 <div className="flex gap-2 items-center">
@@ -130,7 +147,6 @@ const SharedView = () => {
 
             <div className="p-4 border-t border-gray-100">
                 <div className="flex gap-2 flex-wrap">
-                    {console.log(content)}
                     {content.tags.map((tag, index) => (
                         <div 
                             key={index} 
@@ -154,9 +170,7 @@ const SharedView = () => {
         // Mock data for testing - replace with actual API call
         setData({
             username: "Anish",
-            content: [
-                // ... your content array
-            ]
+            content: []
         });
         setIsLoading(false);
     }, []);
@@ -174,7 +188,6 @@ const SharedView = () => {
     return (
         <div className="min-h-screen bg-gray-50 p-6">
             <div className="max-w-[2000px] mx-auto">
-                {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                     <div>
                         <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -193,7 +206,6 @@ const SharedView = () => {
                     </button>
                 </div>
 
-                {/* Content Grid */}
                 <div className="flex gap-6 w-full min-h-[200px]">
                     {columnArrays.map((columnCards, columnIndex) => (
                         <div key={columnIndex} className="flex-1 flex flex-col gap-6">

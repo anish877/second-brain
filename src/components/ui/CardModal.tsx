@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 
+//@ts-ignore
 const CardModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
