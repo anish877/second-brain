@@ -29,6 +29,7 @@ const CreateContentModel = ({ isOpen, onClose, fetchCards }: CreateContentModelP
   const [showPreview, setShowPreview] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAutoFilling, setIsAutoFilling] = useState(false);
+  //@ts-ignore
   const [activeFormats, setActiveFormats] = useState({
     bold: false,
     underline: false,

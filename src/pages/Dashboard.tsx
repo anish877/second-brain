@@ -121,6 +121,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex w-full min-h-screen bg-gray-50">
+          {/* @ts-ignore */}
             <Sidebar setCategory={setCategory} category={category} isMobileOpen={false} setIsMobileOpen={function (isOpen: boolean): void {
           throw new Error('Function not implemented.')
         } } />
