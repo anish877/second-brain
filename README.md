@@ -1,52 +1,58 @@
-# React + TypeScript + Vite
+<img width="1512" alt="Screenshot 2025-03-23 at 7 27 44 PM" src="https://github.com/user-attachments/assets/fe3b74c1-9ea1-41b0-b3a1-d6527420bc09" /># Second Brain
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Second Brain is a MERN stack-based application that allows users to store all the content they come across while using social media. It enables users to save tweets, YouTube videos, documents, and thoughts seamlessly, providing a personal knowledge hub.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Save & Organize**: Store tweets, YouTube videos, documents, and other thoughts in one place.
+- **AI-Powered Content Generation**: Use AI to generate content based on your thoughts.
+- **Auto-fill Metadata**: Just enter a content link, and AI will fill in the rest.
+- **Share Your Brain**: Share your stored knowledge with others.
+- **User-Friendly Dashboard**: View and manage your saved content easily.
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Main Page
+![Main Page]![Uploading Screenshot 2025-03-23 at 7.27.44 PM.png…]
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Save YouTube, Twitter, Docs, and Thoughts
+![Save Content]<img width="1512" alt="Screenshot 2025-03-23 at 7 27 55 PM" src="https://github.com/user-attachments/assets/696a9e4b-b2e8-4f8a-8906-84e5baf1fa6f" />
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Share Your Brain
+![Share Content]<img width="1512" alt="Screenshot 2025-03-23 at 7 28 07 PM" src="https://github.com/user-attachments/assets/5adca706-0ad7-465a-99e4-b1349f95da2c" />
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-# second-brain
-# second-brain
+### AI Content Generation
+![AI Content]<img width="1512" alt="Screenshot 2025-03-23 at 7 28 30 PM" src="https://github.com/user-attachments/assets/119d28b4-53de-4624-b68f-3d12b83db5c1" />
+
+### Auto-Fill Content Details
+![Auto-Fill]<img width="1512" alt="Screenshot 2025-03-23 at 7 28 43 PM" src="https://github.com/user-attachments/assets/dd434768-e952-4b73-ae91-3aeae0633def" />
+
+
+## Tech Stack
+- **Frontend**: React.js
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **AI Integration**: OpenAI API (for content generation)
+
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/second-brain.git
+   ```
+2. Install dependencies:
+   ```sh
+   cd second-brain
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm start
+   ```
+
+## Contribution
+Feel free to contribute by submitting issues and pull requests!
+
+## License
+MIT License
