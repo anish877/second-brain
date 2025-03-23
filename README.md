@@ -1,5 +1,3 @@
-<img width="1512" alt="Screenshot 2025-03-23 at 7 27 44 PM" src="https://github.com/user-attachments/assets/fe3b74c1-9ea1-41b0-b3a1-d6527420bc09" /># Second Brain
-
 Second Brain is a MERN stack-based application that allows users to store all the content they come across while using social media. It enables users to save tweets, YouTube videos, documents, and thoughts seamlessly, providing a personal knowledge hub.
 
 ## Features
