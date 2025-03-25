@@ -64,6 +64,13 @@ const Login = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border-2 border-gray-200">
+          {/* New demo credentials div */}
+          <div className="mb-4 p-2 bg-gray-100 text-center">
+            <p>Demo Credentials:</p>
+            <p>Username: Anish</p>
+            <p>Password: Anish2305@</p>
+          </div>
+
           <div className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
